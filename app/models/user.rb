@@ -14,5 +14,8 @@ class User < ApplicationRecord
             # uniqueness: true 大文字小文字は区別されない
             # uniqueness: { case_sensitive: false }
             uniqueness: true
-  has_secure_password
+  has_secure_password # nilしかチェックしないので空白は有効になる
+  validates :password,
+            presence: true,
+            length: { minimum: 6 }
 end
