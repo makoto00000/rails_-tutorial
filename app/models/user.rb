@@ -14,4 +14,5 @@ class User < ApplicationRecord
             # uniqueness: true 大文字小文字は区別されない
             # uniqueness: { case_sensitive: false }
             uniqueness: true
+  has_secure_password
 end
