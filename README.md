@@ -41,3 +41,9 @@ rails server
 
 詳しくは、[*Ruby on Rails チュートリアル*](https://railstutorial.jp/)
 を参考にしてください。
+
+
+## 注意事項
+
+- renderへデプロイするとき、PostgreSQLのサーバーは`シンガポール`に
+- build Commandに`bundle exec rake db:migrate;`を追加する。
