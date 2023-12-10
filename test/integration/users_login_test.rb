@@ -52,7 +52,9 @@ class Logout < ValidLogin
     super
     delete logout_path
   end
+end
 
+class LogoutTest < Logout
   test "successful logout" do
     assert_not is_logged_in?
     assert_response :see_other
