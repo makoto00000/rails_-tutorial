@@ -5,7 +5,7 @@ module SessionsHelper
   end
 
   def remember(user)
-    user.remember
+    user.remember # remember_tokenを生成し、クラス変数（そのまま）とremember_digest（ハッシュ化）に保存
     cookies.permanent.encrypted[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
@@ -27,7 +27,7 @@ module SessionsHelper
   end
 
   def forget(user)
-    user.forget
+    user.forget # remember_digestをnilにする
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end

@@ -37,6 +37,7 @@ class User < ApplicationRecord
   end
 
   def authenticated?(remember_token)
+    # remember_digestはカラムとして定義しているためそのまま使える
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
