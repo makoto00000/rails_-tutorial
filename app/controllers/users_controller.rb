@@ -18,11 +18,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      reset_session
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user # redirect_to user_url(@user)と同じ。勝手に解釈
-      # 本来 redirect_to user_url(@user.id)と書くところだが、モデルオブジェクトが渡されるとidを取得しようとしてくれるため、@userでも、@user.idと同じ結果になる。
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your accout."
+      redirect_to root_url
     else
       render 'new', status: :unprocessable_entity
     end
