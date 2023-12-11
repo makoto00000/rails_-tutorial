@@ -16,10 +16,11 @@ class User < ApplicationRecord
             # uniqueness: true 大文字小文字は区別されない
             # uniqueness: { case_sensitive: false }
             uniqueness: true
-  has_secure_password # nilしかチェックしないので空白は有効になる
+  has_secure_password # レコード登録時にだけ存在性のvalidationを行う ただし空文字は登録できる
   validates :password,
-            presence: true,
-            length: { minimum: 6 }
+            presence: true, # nil,空文字でないことを確認（内部でblank_メソッドを使用）
+            length: { minimum: 6 },
+            allow_nil: true # nilのときvalidationをスキップ
 
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
