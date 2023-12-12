@@ -50,8 +50,8 @@ class User < ApplicationRecord
   end
 
   def activate
-    update_attribute(:activated, true)
-    update_attribute(:activated_at, Time.zone.now)
+    # バリデーションされないが、DB問い合わせが1回で済む。
+    update_columns(activated: true, activated_at: Time.zone.now)
   end
 
   def send_activation_email
